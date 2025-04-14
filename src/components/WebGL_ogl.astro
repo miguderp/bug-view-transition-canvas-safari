@@ -5,7 +5,7 @@
 <canvas id="canvas" style="view-transition-name: canvas;"></canvas>
 
 <script>
-	import { Renderer, Plane, Mesh, Camera, Program, Transform } from "ogl";
+	import { Renderer, Mesh, Camera, Program, Transform, Box } from "ogl";
 
 	import vertex from "./vertex.glsl?raw";
 	import fragment from "./fragment.glsl?raw";
@@ -23,22 +23,25 @@
 		dpr: screen.pixelRatio,
 	});
 
-	renderer.setSize(512, 512);
+	renderer.setSize(800, 600);
 
 	const camera = new Camera(renderer.gl, {
 		left: -screen.width / 2,
 		right: screen.width / 2,
 		bottom: -screen.height / 2,
 		top: screen.height / 2,
+		near: 0.001,
+		far: 500,
 	});
 
-	camera.position.set(0, 0, 20);
+	camera.position.set(0, 0, 200);
 
 	const scene = new Transform();
 
-	const geometry = new Plane(renderer.gl, {
+	const geometry = new Box(renderer.gl, {
 		width: 1,
 		height: 1,
+		depth: 1,
 	});
 
 	const program = new Program(renderer.gl, {
@@ -52,7 +55,7 @@
 		program,
 	});
 
-	mesh.scale.set(512, 512, 1);
+	mesh.scale.set(200, 200, 200);
 	mesh.setParent(scene);
 
 	requestAnimationFrame(animate);
@@ -62,6 +65,9 @@
 			scene,
 			camera,
 		});
+
+		mesh.rotation.x += 0.01;
+		mesh.rotation.y += 0.01;
 
 		requestAnimationFrame(animate);
 	}

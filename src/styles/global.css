@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+body {
+	@apply bg-black/90 text-white;
+}
+
 @view-transition {
 	navigation: auto;
 }
