@@ -5,7 +5,7 @@ import Layout from "../layouts/Layout.astro";
 
 <Layout>
 	<div class="bg-black/90 text-white grid place-items-center h-dvh">
-		<div class="grid gap-4">
+		<div class="grid gap-4 text-center">
 			<p id="target" style="view-transition-name: target;">
 				My element that will be animated with a View Transition
 			</p>
@@ -18,6 +18,17 @@ import Layout from "../layouts/Layout.astro";
 			</button>
 
 			<WebGL />
+
+			<p>
+				Repository with code <a
+					href="https://github.com/miguderp/bug-view-transition-canvas-safari"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="underline underline-offset-4"
+				>
+					available here
+				</a>
+			</p>
 		</div>
 	</div>
 </Layout>
@@ -28,8 +39,6 @@ import Layout from "../layouts/Layout.astro";
 	btn!.addEventListener("click", () => {
 		if (document.startViewTransition) {
 			document.startViewTransition(() => {
-				console.log("View transition");
-
 				target?.classList.toggle("text-red-500");
 			});
 		} else {
