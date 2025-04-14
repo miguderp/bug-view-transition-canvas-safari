@@ -1,0 +1,68 @@
+---
+
+---
+
+<canvas id="canvas"></canvas>
+
+<script>
+	import { Renderer, Plane, Mesh, Camera, Program, Transform } from "ogl";
+
+	import vertex from "./vertex.glsl?raw";
+	import fragment from "./fragment.glsl?raw";
+
+	const canvas = document.getElementById("canvas") as HTMLCanvasElement;
+
+	const screen = {
+		width: window.innerWidth,
+		height: window.innerHeight,
+		pixelRatio: Math.min(window.devicePixelRatio, 2),
+	};
+
+	const renderer = new Renderer({
+		canvas,
+		dpr: screen.pixelRatio,
+	});
+
+	renderer.setSize(512, 512);
+
+	const camera = new Camera(renderer.gl, {
+		left: -screen.width / 2,
+		right: screen.width / 2,
+		bottom: -screen.height / 2,
+		top: screen.height / 2,
+	});
+
+	camera.position.set(0, 0, 20);
+
+	const scene = new Transform();
+
+	const geometry = new Plane(renderer.gl, {
+		width: 1,
+		height: 1,
+	});
+
+	const program = new Program(renderer.gl, {
+		vertex,
+		fragment,
+		uniforms: {},
+	});
+
+	const mesh = new Mesh(renderer.gl, {
+		geometry,
+		program,
+	});
+
+	mesh.scale.set(512, 512, 1);
+	mesh.setParent(scene);
+
+	requestAnimationFrame(animate);
+
+	function animate() {
+		renderer.render({
+			scene,
+			camera,
+		});
+
+		requestAnimationFrame(animate);
+	}
+</script>

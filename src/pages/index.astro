@@ -1,11 +1,39 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import WebGL from "../components/WebGL.astro";
+import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout>
-	<Welcome />
+	<div class="bg-black/90 text-white grid place-items-center h-dvh">
+		<div class="grid gap-4">
+			<p id="target" style="view-transition-name: target;">
+				My element that will be animated with a View Transition
+			</p>
+
+			<button
+				id="btn"
+				class="px-4 py-3 bg-amber-50 text-black cursor-pointer select-none"
+			>
+				Click this to toggle a view transition
+			</button>
+
+			<WebGL />
+		</div>
+	</div>
 </Layout>
+
+<script>
+	const btn = document.getElementById("btn");
+	const target = document.getElementById("target");
+	btn!.addEventListener("click", () => {
+		if (document.startViewTransition) {
+			document.startViewTransition(() => {
+				console.log("View transition");
+
+				target?.classList.toggle("text-red-500");
+			});
+		} else {
+			console.log("View transition not supported");
+		}
+	});
+</script>
