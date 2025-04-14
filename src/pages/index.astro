@@ -7,19 +7,21 @@ import Layout from "../layouts/Layout.astro";
 	<div class="bg-black/90 text-white grid place-items-center h-dvh">
 		<div class="grid gap-4 text-center">
 			<p id="target" style="view-transition-name: target;">
-				My element that will be animated with a View Transition
+				Some random element
 			</p>
 
 			<button
 				id="btn"
 				class="px-4 py-3 bg-amber-50 text-black cursor-pointer select-none"
 			>
-				Click this to toggle a view transition
+				Click this to toggle above
 			</button>
 
 			<WebGL />
 
 			<p>
+				Safari (only) has a visual glitch, making the Canvas disappear
+				for one frame.<br />
 				Repository with code <a
 					href="https://github.com/miguderp/bug-view-transition-canvas-safari"
 					target="_blank"
@@ -27,7 +29,7 @@ import Layout from "../layouts/Layout.astro";
 					class="underline underline-offset-4"
 				>
 					available here
-				</a>
+				</a>.
 			</p>
 		</div>
 	</div>

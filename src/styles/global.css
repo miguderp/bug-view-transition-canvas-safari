@@ -3,3 +3,11 @@
 @view-transition {
 	navigation: auto;
 }
+
+/* this doesn’t change anything, adding it just to prove it’s something related to Safari */
+::view-transition-group(canvas),
+::view-transition-old(canvas),
+::view-transition-new(canvas) {
+	opacity: 1 !important;
+	animation: none !important;
+}
